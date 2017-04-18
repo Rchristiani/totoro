@@ -7,8 +7,6 @@ import (
 	"net/url"
 )
 
-const apiURL string = "https://ghibliapi.herokuapp.com"
-
 //Film data type
 type Film struct {
 	ID string `json:"id"`
@@ -37,20 +35,20 @@ func GetFilms(query ...map[string]string) ([]Film, error) {
 
 	filmRes, err := http.Get(apiURL + "/films?" + params.Encode())
 
-	var Films []Film
+	var films []Film
 	if err != nil {
-		return Films, err
+		return films, err
 	}
 	defer filmRes.Body.Close()
 
 	filmBytes, _ := ioutil.ReadAll(filmRes.Body)
 
-	jsonErr := json.Unmarshal(filmBytes, &Films)
+	jsonErr := json.Unmarshal(filmBytes, &films)
 
 	if jsonErr != nil {
-		return Films, jsonErr
+		return films, jsonErr
 	}
-	return Films, nil
+	return films, nil
 }
 
 //GetFilmByID gets a film by a specific ID

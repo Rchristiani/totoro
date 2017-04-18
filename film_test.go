@@ -9,19 +9,21 @@ func Test_GetFilms(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if len(films) == 50 {
-		t.Log("Passed get films", films)
+	if len(films) > 10 {
+		t.Log("Passed get films")
 	}
 
 	filmLimit, limitErr := GetFilms(map[string]string{
-		"limit": "100",
+		"limit": "10",
 	})
 	if limitErr != nil {
 		t.Error(limitErr)
 	}
-	if len(filmLimit) == 100 {
-		t.Log("Padded get films limit 100", filmLimit)
+
+	if len(filmLimit) == 10 {
+		t.Log("Passed get films limit 10")
 	}
+
 }
 
 func Test_GetFilmByID(t *testing.T) {
@@ -31,6 +33,6 @@ func Test_GetFilmByID(t *testing.T) {
 		t.Error(err)
 	}
 	if film.Title == "Castle in the Sky" {
-		t.Log("Passed get film by id", film)
+		t.Log("Passed get film by id")
 	}
 }
