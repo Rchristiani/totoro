@@ -14,13 +14,13 @@ func Test_GetFilms(t *testing.T) {
 	}
 
 	filmLimit, limitErr := GetFilms(map[string]string{
-		"limit": "10",
+		"limit": "5",
 	})
 	if limitErr != nil {
 		t.Error(limitErr)
 	}
 
-	if len(filmLimit) == 10 {
+	if len(filmLimit) == 5 {
 		t.Log("Passed get films limit 10")
 	}
 
