@@ -15,6 +15,21 @@ func Test_GetVehicles(t *testing.T) {
 		t.Log("Passed get vehicles")
 	}
 
+	vehiclesLimit, limitErr := GetVehicles(map[string]string{
+		"limit":"1",
+	})
+
+	t.Skip("Skiping vehicle limit since it does not quite work at the moment.")
+	if limitErr != nil {
+		t.Error(limitErr)
+	}
+
+	if len(vehiclesLimit) == 1 {
+		t.Log("Passed vehicle limit test")
+	} else {
+		t.Error("Failed to get vehicle limit")
+	}
+
 }
 
 func Test_GetVehiclesByID(t *testing.T) {

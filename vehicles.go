@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"encoding/json"
 	"net/http"
+	"net/url"
 )
 
 //Vehicle data type
@@ -19,11 +20,19 @@ type Vehicle struct {
 }
 
 //GetVehicles gets all the vehicles
-func GetVehicles() ([]Vehicle, error) {
+func GetVehicles(query ...map[string]string) ([]Vehicle, error) {
+
+		params := url.Values{}
+
+		if len(query) > 0 {
+			for key, value := range query[0] {
+				params.Set(key, value)
+			}
+		}
 
 		var vehicles []Vehicle
 
-		vehicleRes, err := http.Get(apiURL + "/vehicles")
+		vehicleRes, err := http.Get(apiURL + "/vehicles?" + params.Encode())
 
 		if err != nil {
 			return vehicles, err
